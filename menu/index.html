@@ -1,8 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    <title>server</title>
 </head>
 <body>
-    <h1>MENU</h1>
+    <h1>Connecting to the server...</h1>
+    <script>
+        const serverAddress = "wss://mc.arch.lol";
+
+        const ws = new WebSocket(serverAddress);
+
+        ws.onopen = function() {
+            console.log("Connection established with the server: " + serverAddress);
+        };
+
+        ws.onerror = function(error) {
+            console.error("Error connecting to the server:", error);
+        };
+
+        ws.onclose = function() {
+            console.log("Connection closed.");
+        };
+    </script>
 </body>
 </html>
