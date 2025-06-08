@@ -7,7 +7,7 @@
     <script>
         async function getPasswordFromRepo() {
             // Adjust the URL to point to your password.txt file in the correct branch
-            const url = 'https://raw.githubusercontent.com/MMM-tek/mmm-tek.github.io/main/password.txt';
+            const url = 'https://raw.githubusercontent.com/MMM-tek/security/main/password.txt';
             try {
                 const response = await fetch(url);
                 if (!response.ok) throw new Error('Failed to fetch password');
