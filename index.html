@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Verification</title>
+    <script>
+        async function getPasswordFromRepo() {
+            // Adjust the URL to point to your password.txt file in the correct branch
+            const url = 'https://raw.githubusercontent.com/MMM-tek/mmm-tek.github.io/main/password.txt';
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Failed to fetch password');
+                return (await response.text()).trim(); // Remove any whitespace/newlines
+            } catch (e) {
+                alert('Could not verify password (fetch error).');
+                throw e;
+            }
+        }
+
+        async function verifyPassword() {
+            const enteredPassword = document.getElementById("password").value;
+            let correctPassword;
+            try {
+                correctPassword = await getPasswordFromRepo();
+            } catch {
+                return; // Already alerted
+            }
+
+            if (enteredPassword === correctPassword) {
+                window.location.href = "https://mmm-tek.github.io/menu/";
+            } else {
+                alert("Incorrect password. Please try again.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Enter the password</h1>
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="verifyPassword()">Submit</button>
+</body>
+</html>
